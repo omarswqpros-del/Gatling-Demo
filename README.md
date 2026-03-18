@@ -6,6 +6,7 @@
 [![License](https://img.shields.io/badge/License-Apache--2.0-yellow.svg)](https://github.com/gatling/gatling-maven-plugin-demo-java/blob/main/LICENSE)
 
 ## 📖 Table of Contents
+
 - [Overview](#overview)
 - [Features](#features)
 - [Quick Start](#quick-start)
@@ -20,19 +21,23 @@
 - [References](#references)
 
 ## Overview
+
 This is an advanced **Gatling Maven plugin demo** in **Java 11+**, simulating realistic e-commerce load on **AceToys.uk** (toy store). It demonstrates:
+
 - Modular page objects & reusable chains.
 - Dynamic user journeys (browse/abandon/purchase).
 - Multiple injection profiles (open/closed workloads).
 - Feeders (CSV/JSON), sessions, assertions.
 
 Includes:
+
 - Basic API example (`example.BasicSimulation`).
 - Full e-commerce suite (`acetoys.AceToysSimulation`).
 
 **Target**: Stress test browsing, cart, login/checkout under various loads.
 
 ## Features
+
 - **Modular Design**: Page objects (`Product`, `Cart`, etc.), scenarios (`TestScenario`), populations (`TestPopulation`).
 - **Randomized Journeys**: 60% browse, 30% abandon, 10% purchase (customizable).
 - **Load Profiles**: Instant, ramp, constant/sec, closed-model.
@@ -41,33 +46,43 @@ Includes:
 - **Maven Wrapper**: `./mvnw gatling:test` (no Maven install needed).
 
 ## Quick Start
+
 1. **Clone/Navigate**:
+
    ```
    cd 'c:/Testing Tools/Gatling/gatling-maven-plugin-demo-java'
    ```
+
 2. **Run Basic Test**:
+
    ```
    ./mvnw clean gatling:test -Dgatling.simulationClass=example.BasicSimulation
    ```
+
 3. **Run AceToys** (default instant 5 users):
+
    ```
    ./mvnw clean gatling:test -Dgatling.simulationClass=acetoys.AceToysSimulation
    ```
 
 ## Simulations
+
 | Simulation | Class | Description | Default Load |
 |------------|-------|-------------|--------------|
 | **Basic** | `example.BasicSimulation` | Simple API session fetch from `api-ecomm.gatling.io`. VU from `-Dvu=1`. | 1 VU atOnce |
 | **AceToys** | `acetoys.AceToysSimulation` | E-comm: Home → Browse → Add cart → Login → Checkout → Logout. | Instant 5 users, assertions |
 
 **AceToys Journey** (loop during 60s):
+
 ```
 initSession → browseStore | abandonBasket | completePurchase (random weighted)
 ```
 
 ## Configuration
+
 - **`pom.xml`**: Gatling 3.15.0, plugin 4.21.3.
 - **`src/test/resources/acetoys-config.properties`**:
+
   ```
   base.url=https://acetoys.uk
   users.count=10
@@ -75,16 +90,19 @@ initSession → browseStore | abandonBasket | completePurchase (random weighted)
   think.time.min=1
   think.time.max=5
   ```
+
 - **`gatling.conf`**: Standard (customize caching, SSL, etc.).
 
 ## Data Feeders
+
 | File | Type | Usage |
 |------|------|-------|
 | `categoryDetails.csv` | CSV | Category browsing (`feed(csv("categoryDetails.csv"))`). |
 | `productDetails.json` | JSON | Product details (`feed(jsonFile("productDetails.json"))`). |
-| `user-credentials.csv` | CSV | Login (`user1/pass`). |
+
 
 ## Architecture
+
 ```
 AceToysSimulation
 ├── httpProtocol (baseUrl, headers, inferHtmlResources)
@@ -96,7 +114,9 @@ AceToysSimulation
 ```
 
 ## Running Tests
+
 **Examples**:
+
 ```
 # Ramp 10 users over 10s
 ./mvnw gatling:test -Dgatling.simulationClass=acetoys.AceToysSimulation -DTEST_TYPE=RAMP_USERS -DUSERS=10
@@ -109,22 +129,26 @@ AceToysSimulation
 ```
 
 **All Sims**:
+
 ```
 ./mvnw gatling:test
 ```
 
 ## Reports & Assertions
+
 - **Location**: `target/gatling/ace-toys-simulation-YYYYMMDD-HHMMSS/`.
 - **Key Metrics**: RT graphs, errors, assertions (global/forAll).
 - **View**: Open `index.html` in browser.
 
 ## Customization
+
 - **Props**: `-DUSERS=50 -DRAMP_DURATION=30 -DTEST_TYPE=...` (instantUsers|RAMP_USERS|COMPLEX_INJECTION|CLOSED_MODEL).
 - **Add Scenarios**: Extend `Simulation`, `setUp(scn.injectOpen(...)).protocols(http)`.
 - **Data**: Edit CSVs/JSONs; add feeders.
 - **Thresholds**: Modify assertions in `AceToysSimulation`.
 
 ## Troubleshooting
+
 | Issue | Solution |
 |-------|----------|
 | Maven not found | Use `./mvnw` (Windows: `mvnw.cmd`). |
@@ -136,12 +160,12 @@ AceToysSimulation
 **Logs**: `logback-test.xml` (DEBUG: add `<logger name="io.gatling" level="DEBUG"/>`).
 
 ## References
+
 - [Gatling Docs](https://gatling.io/docs/gatling/reference/current/)
 - [Java DSL](https://gatling.io/docs/gatling/reference/current/extensions/java_dsl/)
 - [Maven Plugin](https://gatling.io/docs/gatling/reference/current/integrations/maven/)
-- [AceToys Site](https://acetoys.uk) (test target).
+- [AceToys Site](https://acetoys.uk) (Application Under Test).
 
 ---
 
 *Generated/Enhanced by BLACKBOXAI for comprehensive documentation.*
-
