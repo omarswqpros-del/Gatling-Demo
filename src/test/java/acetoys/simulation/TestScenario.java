@@ -11,8 +11,6 @@ import io.gatling.javaapi.core.ScenarioBuilder;
 public class TestScenario {
 
     private static final Duration TEST_DURATION = Duration.ofSeconds(Integer.parseInt(System.getProperty("DURATION", "60")));
-
-    // Helper method to keep logic DRY (Don't Repeat Yourself)
     // This represents the "User Loop" that runs for the duration of the test
     private static ScenarioBuilder createScenario(String name, double browse, double abandon, double purchase) {
         return scenario(name)
@@ -27,10 +25,10 @@ public class TestScenario {
     }
 
     // 1. Default Load Test: Balanced weights
-    public static ScenarioBuilder defaultLoadTest = 
+    public static ScenarioBuilder defaultLoadTest =
         createScenario("Default Load Test", 60.0, 30.0, 10.0);
 
     // 2. High Purchase Load Test: Heavy weight on purchasing
-    public static ScenarioBuilder highPurchaseLoadTest = 
+    public static ScenarioBuilder highPurchaseLoadTest =
         createScenario("High Purchase Load Test", 30.0, 30.0, 40.0);
 }

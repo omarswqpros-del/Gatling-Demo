@@ -44,14 +44,6 @@ public class Customer {
 
     // we added the randomSwitch to simulate some users logging out and some not, to add a bit of variety to the simulation
     public static ChainBuilder logout =
-        // randomSwitch().on(
-        //     Choice.withWeight(10.0, exec(
-        //         http("Logout User")
-        //         .post("/logout")
-        //         .formParam("_csrf", "#{csrfTokenLoggedIn}")
-        //         .check(css("#LoginLink").is("Login"))
-        //     ))
-        // );
         exec(
             http("Logout User")
             .post("/logout")

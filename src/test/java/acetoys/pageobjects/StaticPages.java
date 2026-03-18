@@ -34,7 +34,4 @@ public class StaticPages {
         .get("/get-in-touch")
         .check(substring("as we are not actually a real store!"))
     );
-
-
-
 }

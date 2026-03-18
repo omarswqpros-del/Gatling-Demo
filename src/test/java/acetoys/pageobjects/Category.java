@@ -53,23 +53,6 @@ public class Category {
         })
         );
     
-    // removed cause the above method got parametrized
-    // public static ChainBuilder allProductsPage =
-    // exec(
-    //     http("Load Products List Page - Category: #{categoryName}")
-    //     .get("/category/#{categorySlug}")
-    //     .check(substring("All Products"))
-    //     .check(css("#CategoryName").is("#categoryName"))
-    // );
-
-    // removed cause the above method got parametrized
-    // public static ChainBuilder productListByCategory_BabiesToys=
-    // exec(
-    //     http("Load Products List Page - Category Babies Toys")
-    //     .get("/category/babies-toys")
-    //     .check(css("#CategoryName").is("Babies Toys"))
-    // );
-
     public static ChainBuilder nextPageOfAllProducts_1 =
     exec(
         http("Load Next Page of Products List - Category All Products - Page 1")
