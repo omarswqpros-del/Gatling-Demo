@@ -81,15 +81,7 @@ initSession → browseStore | abandonBasket | completePurchase (random weighted)
 ## Configuration
 
 - **`pom.xml`**: Gatling 3.15.0, plugin 4.21.3.
-- **`src/test/resources/acetoys-config.properties`**:
 
-  ```
-  base.url=https://acetoys.uk
-  users.count=10
-  ramp.duration.seconds=10
-  think.time.min=1
-  think.time.max=5
-  ```
 
 - **`gatling.conf`**: Standard (customize caching, SSL, etc.).
 
@@ -167,5 +159,3 @@ AceToysSimulation
 - [AceToys Site](https://acetoys.uk) (Application Under Test).
 
 ---
-
-*Generated/Enhanced by BLACKBOXAI for comprehensive documentation.*
