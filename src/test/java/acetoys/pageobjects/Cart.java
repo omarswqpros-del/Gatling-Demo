@@ -18,7 +18,7 @@ public class Cart {
     private static final FeederBuilder<Object> productFeeder = 
     jsonFile("data/productDetails.json").random();
 
-    public static ChainBuilder viewCart =
+    public static final ChainBuilder viewCart =
     feed(productFeeder)
     .doIf(session -> !session.getBoolean("customerLoggedIn"))
     .then(exec(Customer.login))
@@ -28,7 +28,7 @@ public class Cart {
         .check(css("#CategoryHeader").is("Cart Overview"))
     );
 
-    public static ChainBuilder increaseQuantityInCart =
+    public static final ChainBuilder increaseQuantityInCart =
     exec(increaseItemsInBasketForSession)
     .exec(increaseSessionBasketTotal)
     .exec(
@@ -38,7 +38,7 @@ public class Cart {
 
     );
 
-    public static ChainBuilder decreaseQuantityInCart =
+    public static final ChainBuilder decreaseQuantityInCart =
     exec(decreaseItemsInBasketForSession)
     .exec(decreaseSessionBasketTotal)
     .exec(
@@ -47,7 +47,7 @@ public class Cart {
         .check(css("#grandTotal").isEL("$#{basketTotal}"))
     );
 
-    public static ChainBuilder checkout=
+    public static final ChainBuilder checkout=
     exec(
         http("Checkout")
         .get("/cart/checkout")

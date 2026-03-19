@@ -10,7 +10,7 @@ import static io.gatling.javaapi.http.HttpDsl.status;
 
 public class StaticPages {
 
-    public static ChainBuilder homepage =
+    public static final ChainBuilder homepage =
     exec(
         http("Load Home Page")
         .get("/")
@@ -21,14 +21,14 @@ public class StaticPages {
         .check(css("#_csrf", "content").saveAs("csrfToken"))
     );
 
-    public static ChainBuilder ourStoryPage =
+    public static final ChainBuilder ourStoryPage =
     exec(
         http("Load Our Story Page")
         .get("/our-story")
         .check(regex("Our fictional toy store was founded online in \\d{4}"))
     );
 
-    public static ChainBuilder getInTouchPage =
+    public static final ChainBuilder getInTouchPage =
     exec(
         http("Load Get In Touch Page")
         .get("/get-in-touch")

@@ -85,20 +85,18 @@ initSession → browseStore | abandonBasket | completePurchase (random weighted)
 
 - **`pom.xml`**: Gatling 3.15.0, plugin 4.21.3.
 
-
 - **`gatling.conf`**: Standard (customize caching, SSL, etc.).
 
 ## Data Feeders
 
 | File | Type | Usage |
-|------|------|-------|
+| ------ | ------ | ------- |
 | `categoryDetails.csv` | CSV | Category browsing (`feed(csv("categoryDetails.csv"))`). |
 | `productDetails.json` | JSON | Product details (`feed(jsonFile("productDetails.json"))`). |
 
-
 ## Architecture
 
-```
+```text
 AceToysSimulation
 ├── httpProtocol (baseUrl, headers, inferHtmlResources)
 ├── TestScenario.{default/highPurchase}LoadTest
@@ -112,7 +110,8 @@ AceToysSimulation
 
 **Examples**:
 
-```
+```bash
+#!/bin/bash
 # Ramp 10 users over 10s
 ./mvnw gatling:test -Dgatling.simulationClass=acetoys.AceToysSimulation -DTEST_TYPE=RAMP_USERS -DUSERS=10
 
@@ -125,7 +124,8 @@ AceToysSimulation
 
 **All Sims**:
 
-```
+```bash
+#!/bin/bash
 ./mvnw gatling:test
 ```
 
@@ -145,7 +145,7 @@ AceToysSimulation
 ## Troubleshooting
 
 | Issue | Solution |
-|-------|----------|
+| ------- | ---------- |
 | Maven not found | Use `./mvnw` (Windows: `mvnw.cmd`). |
 | OOM/High CPU | Increase JVM: `-Xmx4g -Xms2g`. |
 | SSL errors | `gatling.ssl.useInsecureTrustManager=true`. |

@@ -11,7 +11,7 @@ public class UserSession {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    public static ChainBuilder initSession =
+    public static final ChainBuilder initSession =
     exec(flushCookieJar())
     .exec(session -> session.set("productListPageNumber", 1))
     .exec(session -> session.set("categoryPages", 1))
@@ -19,19 +19,19 @@ public class UserSession {
     .exec(session -> session.set("itemsInBasket", 0))
     .exec(session -> session.set("basketTotal", 0.00));
 
-    public static ChainBuilder increaseItemsInBasketForSession =
+    public static final ChainBuilder increaseItemsInBasketForSession =
     exec(session -> {
         int itemsInBasket = session.getInt("itemsInBasket");
         return session.set("itemsInBasket", (itemsInBasket + 1));
     });
 
-    public static ChainBuilder decreaseItemsInBasketForSession =
+    public static final ChainBuilder decreaseItemsInBasketForSession =
     exec(session -> {
         int itemsInBasket = session.getInt("itemsInBasket");
         return session.set("itemsInBasket", (itemsInBasket - 1));
     });
 
-    public static ChainBuilder increaseSessionBasketTotal =
+    public static final ChainBuilder increaseSessionBasketTotal =
     exec(session -> {
         double currentBasketTotal = session.getDouble("basketTotal");
         double itemPrice = session.getDouble("price");
@@ -39,7 +39,7 @@ public class UserSession {
         return session.set("basketTotal", df.format(updatedBasketTotal));
     });
 
-    public static ChainBuilder decreaseSessionBasketTotal =
+    public static final ChainBuilder decreaseSessionBasketTotal =
     exec(session -> {
         double currentBasketTotal = session.getDouble("basketTotal");
         double itemPrice = session.getDouble("price");

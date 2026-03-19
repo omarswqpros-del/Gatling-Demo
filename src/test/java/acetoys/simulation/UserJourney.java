@@ -17,7 +17,7 @@ public class UserJourney {
     private static final Duration LOW_PAUSE = Duration.ofMillis(1000);
     private static final Duration HIGH_PAUSE = Duration.ofMillis(3000);
 
-    public static ChainBuilder browseStore =
+    public static final ChainBuilder browseStore =
     exec(UserSession.initSession)
     
     .exec(StaticPages.homepage)
@@ -37,7 +37,7 @@ public class UserJourney {
         .exec(Product.loadProductDetailsPage)
     );
 
-    public static ChainBuilder abandonBasket =
+    public static final ChainBuilder abandonBasket =
     exec(initSession)
     .exec(StaticPages.homepage)
     .pause(LOW_PAUSE, HIGH_PAUSE)
@@ -47,7 +47,7 @@ public class UserJourney {
     .pause(LOW_PAUSE, HIGH_PAUSE)
     .exec(Product.addProductToCart);
 
-    public static ChainBuilder completePurchase =
+    public static final ChainBuilder completePurchase =
     exec(initSession)
     .exec(StaticPages.homepage)
     .pause(LOW_PAUSE, HIGH_PAUSE)

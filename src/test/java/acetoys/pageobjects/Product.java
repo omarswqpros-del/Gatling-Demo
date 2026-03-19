@@ -16,7 +16,7 @@ public class Product {
     private static final FeederBuilder<Object> productFeeder =
     jsonFile("data/productDetails.json").random();
 
-    public static ChainBuilder loadProductDetailsPage =
+    public static final ChainBuilder loadProductDetailsPage =
     feed(productFeeder)
     .exec(
         http("Load Product Details Page - Product: #{name}")
@@ -24,7 +24,7 @@ public class Product {
         .check(css("#ProductDescription").isEL("#{description}"))
     );
 
-    public static ChainBuilder addProductToCart =
+    public static final ChainBuilder addProductToCart =
     exec(increaseItemsInBasketForSession)
     .exec(increaseSessionBasketTotal)
     .exec(

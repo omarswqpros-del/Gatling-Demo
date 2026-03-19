@@ -1,31 +1,32 @@
 package acetoys.pageobjects;
 
-import io.gatling.javaapi.core.ChainBuilder;
-import java.util.Iterator;
-import scala.util.Random;
-
-import static io.gatling.javaapi.core.CoreDsl.*;
-import static io.gatling.javaapi.http.HttpDsl.*;
-
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import io.gatling.javaapi.core.ChainBuilder;
+import static io.gatling.javaapi.core.CoreDsl.css;
+import static io.gatling.javaapi.core.CoreDsl.exec;
+import static io.gatling.javaapi.core.CoreDsl.feed;
+import static io.gatling.javaapi.http.HttpDsl.http;
+import scala.util.Random;
+
 
 public class Customer {
 
-    private static Iterator<Map<String, Object>> loginFeeder =
+    private static final Iterator<Map<String, Object>> loginFeeder =
     Stream.generate((Supplier<Map<String,Object>>) () -> {
         Random rand = new Random();
         int userId = rand.nextInt(3 - 1 + 1) + 1;
-        HashMap<String, Object> hmap = new HashMap<String, Object>();
+        HashMap<String, Object> hmap = new HashMap<>();
         hmap.put("userId", "user" + userId);
         hmap.put("password", "pass");
         return hmap;
     }).iterator();
 
-    public static ChainBuilder login =
+    public static final ChainBuilder login =
     feed(loginFeeder)
     .exec(
         http("Login User")
@@ -43,7 +44,7 @@ public class Customer {
     });
 
     // we added the randomSwitch to simulate some users logging out and some not, to add a bit of variety to the simulation
-    public static ChainBuilder logout =
+    public static final ChainBuilder logout =
         exec(
             http("Logout User")
             .post("/logout")

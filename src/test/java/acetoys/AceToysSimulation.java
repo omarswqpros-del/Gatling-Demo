@@ -15,7 +15,7 @@ public class AceToysSimulation extends Simulation {
   private static final String BASEURL = System.getProperty("baseURL", "https://acetoys.uk");
 
 
-  private HttpProtocolBuilder httpProtocol = http
+  private final HttpProtocolBuilder httpProtocol = http
   // base url is defined in the protocol to make it easier to change for different environments (e.g. staging, production)
     .baseUrl(BASEURL)
     // this is the list that we denied when using the recorder UI we prevented the static resources
@@ -27,27 +27,30 @@ public class AceToysSimulation extends Simulation {
 
   private static final String TEST_TYPE = System.getProperty("TEST_TYPE", "INSTANT_USERS");
   {
-	  if (TEST_TYPE.equals("INSTANT_USERS")) {
-      setUp(TestPopulation.instantUsers).protocols(httpProtocol)
-      .assertions(
-        global().responseTime().mean().lt(3),
-        global().successfulRequests().percent().gt(99.0),
-        forAll().responseTime().max().lt(5)
-      );
-    } else if(TEST_TYPE.equals("RAMP_USERS")) {
-      setUp(TestPopulation.rampUsers).protocols(httpProtocol);
-    } else if (TEST_TYPE.equals("COMPLEX_INJECTION")) {
-      setUp(TestPopulation.complextInjection).protocols(httpProtocol);
-    } else if (TEST_TYPE.equals("CLOSED_MODEL")) {
-      setUp(TestPopulation.closedModel).protocols(httpProtocol);
-    }
-    else {
-      setUp(TestPopulation.instantUsers).protocols(httpProtocol)
-      .assertions(
-        global().responseTime().mean().lt(3),
-        global().successfulRequests().percent().gt(99.0),
-        forAll().responseTime().max().lt(5)
-        );
-    }
+      switch (TEST_TYPE) {
+          case "INSTANT_USERS":
+              setUp(TestPopulation.instantUsers).protocols(httpProtocol)
+                      .assertions(
+                              global().responseTime().mean().lt(3),
+                              global().successfulRequests().percent().gt(99.0),
+                              forAll().responseTime().max().lt(5)
+                      );      break;
+          case "RAMP_USERS":
+              setUp(TestPopulation.rampUsers).protocols(httpProtocol);
+              break;
+          case "COMPLEX_INJECTION":
+              setUp(TestPopulation.complextInjection).protocols(httpProtocol);
+              break;
+          case "CLOSED_MODEL":
+              setUp(TestPopulation.closedModel).protocols(httpProtocol);
+              break;
+          default:
+              setUp(TestPopulation.instantUsers).protocols(httpProtocol)
+                      .assertions(
+                              global().responseTime().mean().lt(3),
+                              global().successfulRequests().percent().gt(99.0),
+                              forAll().responseTime().max().lt(5)
+                      );    break;
+      }
   }
 }
