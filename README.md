@@ -49,32 +49,35 @@ Includes:
 
 1. **Clone/Navigate**:
 
-   ```
+   ```bash
+   #!/bin/bash
    cd 'c:/Testing Tools/Gatling/gatling-maven-plugin-demo-java'
    ```
 
 2. **Run Basic Test**:
 
-   ```
+   ```bash
+   #!/bin/bash
    ./mvnw clean gatling:test -Dgatling.simulationClass=example.BasicSimulation
    ```
 
 3. **Run AceToys** (default instant 5 users):
 
-   ```
+   ```bash
+   #!/bin/bash
    ./mvnw clean gatling:test -Dgatling.simulationClass=acetoys.AceToysSimulation
    ```
 
 ## Simulations
 
 | Simulation | Class | Description | Default Load |
-|------------|-------|-------------|--------------|
+| :--- | :--- | :--- | :--- |
 | **Basic** | `example.BasicSimulation` | Simple API session fetch from `api-ecomm.gatling.io`. VU from `-Dvu=1`. | 1 VU atOnce |
 | **AceToys** | `acetoys.AceToysSimulation` | E-comm: Home → Browse → Add cart → Login → Checkout → Logout. | Instant 5 users, assertions |
 
 **AceToys Journey** (loop during 60s):
 
-```
+```text
 initSession → browseStore | abandonBasket | completePurchase (random weighted)
 ```
 
