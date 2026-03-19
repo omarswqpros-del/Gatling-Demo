@@ -161,4 +161,12 @@ AceToysSimulation
 - [Maven Plugin](https://gatling.io/docs/gatling/reference/current/integrations/maven/)
 - [AceToys Site](https://acetoys.uk) (Application Under Test).
 
+## Contributors
+
+We'd like to thank the contributors who help maintain and improve this project:
+
+- [OmarAlsweiti](https://github.com/omarswqpros-del) - Active contributor and maintainer
+- [Stephane Landelle](https://github.com/slandelle) - Founder of Gatling
+- [Obero](https://github.com/Obero)
+
 ---
